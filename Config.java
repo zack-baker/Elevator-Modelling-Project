@@ -40,5 +40,25 @@ public class Config{
 
 		}	
 	}
+	/*
+	*
+	*	GETTER METHODS
+	*
+	*/
+
+	/**
+	*	Getter method for the number of elevators to use in the simulation
+	*	@return the number of elevators to use in the simulation
+	*/
+	public int get_number_of_elevators(){
+		return number_of_elevators;
+	}
+	/**
+	*	Getter method for the lambda value. The lambda value is used in the Poisson distribution to calculate the arrival rate of patons on each floor
+	*	@return the lambda value to use for the simulation
+	*/
+	public double get_lambda(){
+		return lambda;
+	}
 
 }
