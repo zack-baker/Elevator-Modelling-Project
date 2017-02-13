@@ -1,4 +1,7 @@
-public class Config(){
+import java.util.Scanner; //Used for the scanner class
+import java.io.File; //used for the file class
+import java.io.FileNotFoundException;// used for the file not found exception
+public class Config{
 
 	private int number_of_elevators; //the number of elevators for the simulation to use
 	private double lambda;//the lambda value of the simulation; used in the poisson distribution to determine patron arrival at a specific floor
@@ -15,26 +18,27 @@ public class Config(){
 	public Config(String pathname){
 		sim_name = pathname;
 		pathname = "config/" + pathname + ".conf";//get the config file specifically from the given path
-		Scanner sc;//create the scanner object to read the config file
+		Scanner sc = null;//create the scanner object to read the config file
 		try{
 			sc = new Scanner(new File(pathname));
 		}catch(FileNotFoundException fnf){
-			System.println("File Not Found Exception in Config constructor");
+			System.out.println("File Not Found Exception in Config constructor");
 		}
 		while (sc.hasNextLine()) {//for each line
 			String line = sc.nextLine();	
-			String[] line_split = line.split("\s");//split the line into parameter name and parameter value
+			String[] line_split = line.split("\\s");//split the line into parameter name and parameter value
 			switch(line_split[0]){
-				case "numElevators": number_of_elevators = (int)line_split[1]; break;
-				case "lambda": lambda = (double)line_split[1]; break;
-				case "stepsPerFloorElevator": steps_per_floor_elevator = (int)line_split[1]; break;
-				case "stepsPerFloorStairsUp": steps_per_floor_stairs_up = (int)line_split[1]; break;
-				case "stepsPerFloorStairsDown": steps_per_floor_stairs_down = (int)line_split[1]; break;
-				case "stationarySteps": stationary_steps = (int)line_split[1]; break;
-				case "simSteps": simSteps = (int) line_split[1]; break;
+				case "numElevators": number_of_elevators = Integer.parseInt(line_split[1]); break;
+				case "lambda": lambda = Double.parseDouble(line_split[1]); break;
+				case "stepsPerFloorElevator": steps_per_floor_elevator = Integer.parseInt(line_split[1]); break;
+				case "stepsPerFloorStairsUp": steps_per_floor_stairs_up = Integer.parseInt(line_split[1]); break;
+				case "stepsPerFloorStairsDown": steps_per_floor_stairs_down = Integer.parseInt(line_split[1]); break;
+				case "stationarySteps": stationary_steps = Integer.parseInt(line_split[1]); break;
+				case "simSteps": simulation_steps = Integer.parseInt(line_split[1]); break;
 				default: 
 			}
 
 		}	
 	}
+
 }
