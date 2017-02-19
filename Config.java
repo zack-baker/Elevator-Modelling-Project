@@ -5,7 +5,7 @@ public class Config{
 
 	private int number_of_elevators; //the number of elevators for the simulation to use
 	private double lambda;//the lambda value of the simulation; used in the poisson distribution to determine patron arrival at a specific floor
-	private int steps_per_floor_elevator; //the number of timesteps it takes an 
+	private int steps_per_floor_elevator; //the number of timesteps it takes the elevator to travel one floor
 	private int steps_per_floor_stairs_up; // the number of timesteps it takes to go up one floor on the stairs in the elevator
 	private int steps_per_floor_stairs_down;// the number of timesteps it takes to go down one floor on the stairs in the elevator
 	private int stationary_steps;// the number of steps the elevator doors remain open once the elevator arrives at a floor
@@ -17,7 +17,7 @@ public class Config{
 	*/
 	public Config(String pathname){
 		sim_name = pathname;
-		pathname = "config/" + pathname + ".conf";//get the config file specifically from the given path
+		pathname = "configs/" + pathname + ".conf";//get the config file specifically from the given path
 		Scanner sc = null;//create the scanner object to read the config file
 		try{
 			sc = new Scanner(new File(pathname));
@@ -59,6 +59,60 @@ public class Config{
 	*/
 	public double get_lambda(){
 		return lambda;
+	}
+	/**
+	*	Getter method for the number of timesteps it takes the elevator to travel one floor
+	*/
+	public int get_steps_per_floor_elevator(){
+		return steps_per_floor_elevator;
+	}
+	/**
+	*	Getter method for the number of timesteps it takes someone to travel one floor via stairs going up
+	*/
+	public int get_steps_per_floor_stairs_up(){
+		return steps_per_floor_stairs_up;
+	}
+	/**
+	*	Getter method for the number of timesteps it takes someone to travel one floor via stairs going down
+	*/
+	public int get_steps_per_floor_stairs_down(){
+		return steps_per_floor_stairs_down;
+	}
+	/**
+	*	Getter method for the number of timesteps the elevator door stays open when it opens
+	*/
+	public int get_stationary_steps(){
+		return stationary_steps;
+	}
+	/**
+	*	Getter method for the number of timesteps to run the simulation for
+	*/
+	public int get_simulation_steps(){
+		return simulation_steps;
+	}
+	/**
+	*	Getter method for the simulation name
+	*/
+	public String get_simulation_name(){
+		return sim_name;
+	}
+	/**
+	*	Method to 'Stringify' the config object; overrides the toString method
+	*/
+	public String toString(){
+		String str = "--------------------------------------------\n";
+		str+= "|        Simulation name: " + sim_name + "       |\n";
+		str+= "|          Number of Elevators: " + number_of_elevators + "          |\n";
+		str+= "|             Lambda: " + lambda + "              |\n"; 
+		str+= "|      Steps per floor (elevator): " + steps_per_floor_elevator + "      |\n";
+		str+= "|     Steps per floor (stairs, up): " + steps_per_floor_stairs_up + "     |\n";
+		str+= "|    Steps per floor (stairs, down): " + steps_per_floor_stairs_down + "    |\n";
+		str+= "|    # of elevator stationary steps: " + stationary_steps + "    |\n" ;
+		str+= "|          Total timesteps: " + simulation_steps + "          |\n";
+		str+= "--------------------------------------------\n";
+
+		return str;
+
 	}
 
 }
