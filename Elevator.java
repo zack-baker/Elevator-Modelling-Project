@@ -9,10 +9,10 @@ public class Elevator{
 	private ArrayList<Person> people;
 	private ArrayList<Floor> destinations;
 
-	public Elevator(Config c){
+	public Elevator(Config c, Floor start_floor){
 		spf = c.get_steps_per_floor_elevator();
 		stationary_time = c.get_stationary_steps();
-		cur_floor = new Floor(1);
+		cur_floor = start_floor;
 		up = true;
 		people = new ArrayList();
 		destinations = new ArrayList();
