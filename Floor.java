@@ -51,6 +51,12 @@ public class Floor
 			add_person(p);
 		}
 	}
+
+
+	public int get_Floor()
+	{
+		return floor_number;
+
 	public Floor get_floor_above(){
 		if(floor_number==Floors.floors.length){
 			return null;
@@ -64,5 +70,6 @@ public class Floor
 		}else{
 			return Floors.floors[floor_number-1-1];
 		}
+
 	}
 }

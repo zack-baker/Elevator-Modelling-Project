@@ -5,27 +5,29 @@ public class Person
 
 	private int stair_up;
 	private int stair_down;
-	private int time_spawned;
+	private int time_deleted;
 	private Floor destination;
+	
+
 	//constructor
 	public Person(Floor f)
 	{
 		time_spawned = Timekeeper.get_timestep();
-		
+		//create random floor destination for each person
+		Random r = new Random();
+		int floorNumber = r.nextInt(7);
+		while(Floor.get_Floor() == floorNumber)
+			floorNumber = r.nextInt(7);
+		destination = Floors.floors[floorNumber];
+		//time_spawned = ; //poisson distribution
 	}
-	
 
-	
 
 	///////////GETTERS///////////////////////
-	public int get_floor_on()
+	
+	public Floor get_floor_off()
 	{
-		
-	}
-
-	public int get_floor_off()
-	{
-
+		return destination;
 	}
 
 	public int get_stair_up()
