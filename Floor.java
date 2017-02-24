@@ -1,9 +1,9 @@
-import java.util.Queue;
+import java.util.LinkedList;
 public class Floor
 {
 	private int floor_number;
 	private double floor_lambda;
-	private Queue<Person> people;
+	private LinkedList<Person> people;
 	//constructor for Floor object class
 	/**
 	*	Main constructor for the Floor class; takes in a config object and an int for its floor number
@@ -13,7 +13,7 @@ public class Floor
 	public Floor(Config config, int floor_num)
 	{
 		floor_number = floor_num;
-		people = new Queue();
+		people = new LinkedList<Person>();
 		//determining floor lambda values
 		if(floor_num==1){
 			floor_lambda = config.get_lambda();

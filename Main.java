@@ -4,7 +4,7 @@ public class Main{
 	public static void main(String[] args){
 		Config c = new Config(args[0]);//the first command line argument is the path of the config file
 		System.out.println(c);
-
+		Floors.init(c);
 		//loop through each timestep
 		for(int ts = 0; ts<c.get_simulation_steps();ts++){
 		}
