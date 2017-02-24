@@ -24,6 +24,7 @@ public class Main{
 			for(int i=0;i<elevators.length;i++){
 				elevators[i].check_if_next_floor();
 			}
+			Timekeeper.increment_timestep();
 
 		}
 	}
