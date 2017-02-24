@@ -29,7 +29,7 @@ public class Elevator{
 	public void check_if_next_floor(){
 		//if enough time has passed, advance to the next floor
 		if(Timekeeper.get_timestep()-last_timestep_on_floor>=spf){
-
-		}
+			
+		}		
 	}
 }
