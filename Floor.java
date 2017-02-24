@@ -4,6 +4,8 @@ public class Floor
 	private int floor_number;
 	private double floor_lambda;
 	private LinkedList<Person> people;
+	private Floor floor_below;
+	private Floor floor_above;
 	//constructor for Floor object class
 	/**
 	*	Main constructor for the Floor class; takes in a config object and an int for its floor number
@@ -50,8 +52,24 @@ public class Floor
 		}
 	}
 
+
 	public int get_Floor()
 	{
 		return floor_number;
+
+	public Floor get_floor_above(){
+		if(floor_number==Floors.floors.length){
+			return null;
+		}else{
+			return Floors.floors[floor_number];
+		}
+	}
+	public Floor get_floor_below(){
+		if(floor_number==1){
+			return null;
+		}else{
+			return Floors.floors[floor_number-1-1];
+		}
+
 	}
 }
