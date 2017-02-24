@@ -6,7 +6,18 @@ public class Main{
 		System.out.println(c);
 		Floors.init(c);
 		//loop through each timestep
-		for(int ts = 0; ts<c.get_simulation_steps();ts++){
+		Elevator[] elevators = new Elevator[c.get_number_of_elevators()];
+		for(int i=0;i<elevators.length;i++){
+			elevators[i] = new Elevator(c, Floors.floors[0]);
+		}
+		while(Timekeeper.get_timestep()<c.get_simulation_steps()){
+			for(int i=0;i<Floors.floors.length;i++){
+				Floors.floors[i].spawn_person();
+			}
+			for(int i=0;i<elevators.length;i++){
+				elevators[i].check_if_next_floor();
+			}
+
 		}
 	}
 
