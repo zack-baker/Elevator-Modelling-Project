@@ -1,8 +1,13 @@
 import java.util.Random;
 public class Main{
 
+	public static int steps_up;
+	public static int steps_down;
+
 	public static void main(String[] args){
 		Config c = new Config(args[0]);//the first command line argument is the path of the config file
+		steps_up = c.get_steps_per_floor_stairs_up();
+		steps_down = c.get_steps_per_floor_stairs_down();
 		System.out.println(c);
 		Floors.init(c);
 		//loop through each timestep

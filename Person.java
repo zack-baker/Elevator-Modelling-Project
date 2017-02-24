@@ -4,29 +4,26 @@ public class Person
 {
 	//person object
 
-	private int stair_up;
-	private int stair_down;
-	private int time_spawned;
-
-	private int time_deleted;
-
 	private Floor destination;
+	private int steps_walking;
+	private int time_spawned;
 	
 
 	//constructor
-	public Person()
+	public Person(Floor f)
 	{
-
 		time_spawned = Timekeeper.get_timestep();
-
 		//create random floor destination for each person
 		Random r = new Random();
-		int floorNumber = r.nextInt(7);
-		while(Floor.get_Floor() == floorNumber)
-			floorNumber = r.nextInt(7);
-
-		destination = Floors.floors[floorNumber];
-		
+		int floorNumber = r.nextInt(7)+1;
+		while(floorNumber==f.get_floor())
+			floorNumber = r.nextInt(7)+1;
+		destination = Floors.floors[floorNumber-1];
+		if(f.get_floor()<destination.get_floor()){//if your destination is above you
+			steps_walking = Main.steps_up*(Math.abs(f.get_floor()-destination.get_floor()));
+		}else{
+			steps_walking = Main.steps_down*(Math.abs(f.get_floor()-destination.get_floor()));
+		}
 		//time_spawned = ; //poisson distribution
 	}
 
@@ -37,19 +34,10 @@ public class Person
 	{
 		return destination;
 	}
-
-	public int get_stair_up()
-	{
-		return stair_up;
-	}
-
-	public int get_stair_down()
-	{
-		return stair_down;
-	}
 	public void delete(){
 		//Log total time here
-		System.out.println("DELETING A PERSON: Total Time: " + time_spawned-Timekeeper.get_timestep());
+
+		System.out.println("DELETING A PERSON: Total Time: " + (time_spawned-Timekeeper.get_timestep());
 
 		PrintWriter p = null; //initializing printwriter
 
@@ -67,10 +55,11 @@ public class Person
 		//p.write("total time\n");
 		p.write(time_spawned);
 		p.write(TimeKeeper.get_timestep());
-		p.write(time_spawned-TimeKeeper.get_timestep());
+		p.write((time_spawned-TimeKeeper.get_timestep());
 
 		p.flush();
 		
+
 
 
 	}

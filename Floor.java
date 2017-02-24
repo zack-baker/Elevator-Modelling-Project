@@ -47,16 +47,15 @@ public class Floor
 	public void spawn_person(){
 		int new_people = Main.get_poisson(floor_lambda);
 		for(int i=0;i<new_people;i++){
-			Person p = new Person();
+			Person p = new Person(this);
 			add_person(p);
 		}
 	}
 
 
-	public int get_Floor()
-	{
+	public int get_floor(){
 		return floor_number;
-
+	}
 	public Floor get_floor_above(){
 		if(floor_number==Floors.floors.length){
 			return null;
