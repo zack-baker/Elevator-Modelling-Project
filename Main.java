@@ -3,11 +3,13 @@ public class Main{
 
 	public static int steps_up;
 	public static int steps_down;
+	public static String sim_name;
 
 	public static void main(String[] args){
 		Config c = new Config(args[0]);//the first command line argument is the path of the config file
 		steps_up = c.get_steps_per_floor_stairs_up();
 		steps_down = c.get_steps_per_floor_stairs_down();
+		sim_name = c.get_simulation_name();
 		System.out.println(c);
 		Floors.init(c);
 		//loop through each timestep
