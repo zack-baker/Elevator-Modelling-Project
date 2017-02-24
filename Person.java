@@ -39,27 +39,16 @@ public class Person
 
 		System.out.println("DELETING A PERSON: Total Time: " + (time_spawned-Timekeeper.get_timestep());
 
-		PrintWriter p = null; //initializing printwriter
-
+		String line = String(time_spawned) + " " + String(Timekeeper.get_timestep()) + " " + String(Timekeeper.get_timestep()-time_spawned) + " " + steps_walking;
+		
 		try
 		{
-			p = new PrintWriter("testfile_1.csv");
+			Files.wwrite(Paths.get("logtest_1.txt"), line.getBytes(), StandardOpenOption.APPEND);
 		}
-		catch(FileNotFoundException e)
+		catch(IOException e)
 		{
-			System.out.println("No File Found");
+			System.out.println("can't open the file");
 		}
-
-		//p.write("start time");
-		//p.write("end time");
-		//p.write("total time\n");
-		p.write(time_spawned);
-		p.write(TimeKeeper.get_timestep());
-		p.write((time_spawned-TimeKeeper.get_timestep());
-
-		p.flush();
-		
-
 
 
 	}
