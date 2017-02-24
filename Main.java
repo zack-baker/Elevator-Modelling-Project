@@ -7,7 +7,6 @@ public class Main{
 
 		//loop through each timestep
 		for(int ts = 0; ts<c.get_simulation_steps();ts++){
-			System.out.println(get_poisson(c.get_lambda()));
 		}
 	}
 
