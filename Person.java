@@ -7,6 +7,7 @@ public class Person extends People
 	private int stair_down;
 	private int time_spawned;
 	private int time_deleted;
+	private Floor destination;
 	
 	//constructor
 	public Person()
@@ -14,6 +15,10 @@ public class Person extends People
 
 		time_spawned = Timekeeper.get_timestep();
 
+		Random r = new Random();
+		destination = r.nextInt(7);
+		while(Floor.get_Floor() == destination)
+			destination = r.nextInt(7);
 		//time_spawned = ; //poisson distribution
 	}
 	
@@ -23,12 +28,12 @@ public class Person extends People
 	///////////GETTERS///////////////////////
 	public int get_floor_on()
 	{
-
+		return 0;
 	}
 
 	public int get_floor_off()
 	{
-
+		return destination;
 	}
 
 	public int get_stair_up()

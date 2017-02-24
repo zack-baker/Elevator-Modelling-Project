@@ -49,4 +49,9 @@ public class Floor
 			add_person(p);
 		}
 	}
+
+	public int get_Floor()
+	{
+		return floor_number;
+	}
 }
