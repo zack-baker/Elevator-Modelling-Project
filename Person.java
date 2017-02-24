@@ -9,12 +9,12 @@ public class Person
 	private int time_deleted;
 	
 	//constructor
-	public Person(Config config)
+	public Person()
 	{
-		stair_up = Config.get_steps_per_floor_stairs_up();
-		stair_down = Config.get_steps_per_floor_stairs_down();
+		time_spawned = Timekeeper.get_timestep();
 		//time_spawned = ; //poisson distribution
 	}
+	
 
 	
 
