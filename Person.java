@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.io.*; //for printwriter
 public class Person
 {
 	//person object
@@ -35,7 +36,21 @@ public class Person
 	}
 	public void delete(){
 		//Log total time here
-		System.out.println("DELETING A PERSON: Total Time: " + (time_spawned-Timekeeper.get_timestep()));
+
+		System.out.println("DELETING A PERSON: Total Time: " + (time_spawned-Timekeeper.get_timestep());
+
+		String line = String(time_spawned) + " " + String(Timekeeper.get_timestep()) + " " + String(Timekeeper.get_timestep()-time_spawned) + " " + steps_walking;
+		
+		try
+		{
+			Files.wwrite(Paths.get("logtest_1.txt"), line.getBytes(), StandardOpenOption.APPEND);
+		}
+		catch(IOException e)
+		{
+			System.out.println("can't open the file");
+		}
+
+
 	}
 
 
