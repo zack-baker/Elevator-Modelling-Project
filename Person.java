@@ -7,7 +7,7 @@ public class Person extends People
 	private int stair_down;
 	private int time_spawned;
 	private int time_deleted;
-	
+	private Floor destination
 	//constructor
 	public Person()
 	{
@@ -23,7 +23,7 @@ public class Person extends People
 	///////////GETTERS///////////////////////
 	public int get_floor_on()
 	{
-
+		
 	}
 
 	public int get_floor_off()
