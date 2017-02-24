@@ -19,19 +19,21 @@ public class Person extends People
 
 		time_spawned = Timekeeper.get_timestep();
 
+		//create random floor destination for each person
 		Random r = new Random();
-		destination = r.nextInt(7);
-		while(Floor.get_Floor() == destination)
-			destination = r.nextInt(7);
+		int floorNumber = r.nextInt(7);
+		while(Floor.get_Floor() == floorNumber)
+			floorNumber = r.nextInt(7);
+
+		destination = Floors.floors[floorNumber];
+		
 		//time_spawned = ; //poisson distribution
 	}
-	
 
-	
 
 	///////////GETTERS///////////////////////
 	
-	public int get_floor_off()
+	public Floor get_floor_off()
 	{
 		return destination;
 	}
