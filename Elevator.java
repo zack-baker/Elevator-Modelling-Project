@@ -22,8 +22,7 @@ public class Elevator{
 		cur_floor = start_floor;
 		up = true;
 		doors_open = false;
-		people = new ArrayList();
-		destinations = new ArrayList();
+		people = new ArrayList<Person>();
 		last_timestep_on_floor = 0;
 	}
 
@@ -43,7 +42,7 @@ public class Elevator{
 				cur_floor = cur_floor.get_floor_below();//move to the floor below us
 			}
 			boolean people_moved = false;//a boolean to keep track of whether or not people have gotten on or off the elevator here
-			Person[] people_arr = people.toArray();// convert the ArrayList to an array
+			Person[] people_arr = (Person[])people.toArray();// convert the ArrayList to an array
 			for(int i=0;i<people_arr.length;i++){//for each person in the elevator
 				if(people_arr[i].get_floor_off()==cur_floor){//if people want to get off at this floor
 
@@ -65,7 +64,7 @@ public class Elevator{
 				doors_open = true;
 			}
 
-			if(floor_number==8 || floor_number==1){//if at top or bottom floor, switch directions
+			if(cur_floor.get_floor()==8 || cur_floor.get_floor()==1){//if at top or bottom floor, switch directions
 				up = !up;
 			}
 		}		
