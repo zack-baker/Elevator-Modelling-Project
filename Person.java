@@ -1,5 +1,5 @@
 
-public class Person
+public class Person extends People
 {
 	//person object
 
@@ -11,8 +11,8 @@ public class Person
 	//constructor
 	public Person(Config config)
 	{
-		stair_up = Config.get_steps_per_floor_stairs_up();
-		stair_down = Config.get_steps_per_floor_stairs_down();
+		stair_up = config.get_steps_per_floor_stairs_up();
+		stair_down = config.get_steps_per_floor_stairs_down();
 		//time_spawned = ; //poisson distribution
 	}
 
