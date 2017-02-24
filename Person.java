@@ -6,8 +6,7 @@ public class Person
 	private int stair_up;
 	private int stair_down;
 	private int time_spawned;
-	private int time_deleted;
-	private Floor destination
+	private Floor destination;
 	//constructor
 	public Person()
 	{
@@ -39,6 +38,10 @@ public class Person
 	public int get_stair_down()
 	{
 		return stair_down;
+	}
+	public void delete(){
+		//Log total time here
+		System.out.println("DELETING A PERSON: Total Time: " + time_spawned-Timekeeper.get_timestep());
 	}
 
 
