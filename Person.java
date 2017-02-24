@@ -8,12 +8,10 @@ public class Person
 	private int time_spawned;
 	private Floor destination;
 	//constructor
-	public Person()
+	public Person(Floor f)
 	{
-
 		time_spawned = Timekeeper.get_timestep();
-
-		//time_spawned = ; //poisson distribution
+		
 	}
 	
 
