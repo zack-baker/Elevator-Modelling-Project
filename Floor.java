@@ -44,8 +44,9 @@ public class Floor
 	/**
 	*	This method spawns a number of people on the floor and adds them to the existing queue based on a poisson distribution defined by the lambda value of the floor
 	*/
-	public void spawn_person(){
+	public void spawn_person(){	
 		int new_people = Main.get_poisson(floor_lambda);
+		System.out.println("Creating " + new_people + " people on floor " + floor_number);
 		for(int i=0;i<new_people;i++){
 			Person p = new Person(this);
 			add_person(p);

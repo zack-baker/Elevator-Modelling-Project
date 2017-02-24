@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 public class Elevator{
 
 	private final int capacity = 12;
@@ -29,28 +30,37 @@ public class Elevator{
 	public void check_if_next_floor(){
 		if(doors_open){
 			if(Timekeeper.get_timestep()-last_timestep_on_floor>=stationary_time){
+				System.out.println("Doors are now closed");
 				doors_open = false;
+				last_timestep_on_floor = Timekeeper.get_timestep();
+			}else{
+				return;
 			}
-			return;
 		}
 		//if enough time has passed, advance to the next floor
 		if(Timekeeper.get_timestep()-last_timestep_on_floor>=spf){
 			last_timestep_on_floor = Timekeeper.get_timestep();//update the last time the elevator was on the floor
 			if(up){//if we are moving up 
 				cur_floor = cur_floor.get_floor_above();//move to the floor above us
+				System.out.println("Moving up to " + cur_floor.get_floor());
 			}else{//otherwise
 				cur_floor = cur_floor.get_floor_below();//move to the floor below us
+				System.out.println("Moving down to " + cur_floor.get_floor());
 			}
 			boolean people_moved = false;//a boolean to keep track of whether or not people have gotten on or off the elevator here
-			Person[] people_arr = (Person[])people.toArray();// convert the ArrayList to an array
+			int people_change = 0;
+			Person[] people_arr = Arrays.copyOf(people.toArray(), people.toArray().length, Person[].class);// convert the ArrayList to an array
 			for(int i=0;i<people_arr.length;i++){//for each person in the elevator
 				if(people_arr[i].get_floor_off()==cur_floor){//if people want to get off at this floor
 
 					people_moved = true;
 					people.remove(people_arr[i]);//take them out of the array list
 					people_arr[i].delete();//"delete" that person
+					people_change++;
 				}	
 			}
+			System.out.println(people_change + " people have moved off the elevator");
+			people_change = 0;
 			int capacity_remaining = capacity-people.size();//calculate how many people can fit in the elevator
 			for(int i=0;i<capacity_remaining;i++){//for each space in the elevator that can hold a person
 				Person person = cur_floor.remove_person();//pop the next person off the linked list of people of the current floor
@@ -58,13 +68,16 @@ public class Elevator{
 					break;
 				}
 				people_moved = true;
+				people_change++;
 				people.add(person);//add the removed person to the ArrayList of people on the elevator
 			}
+			System.out.println(people_change + " people have moved on the elevator");
 			if(people_moved){//if people got on/off the elevator on this floor, open the doors
 				doors_open = true;
 			}
 
 			if(cur_floor.get_floor()==8 || cur_floor.get_floor()==1){//if at top or bottom floor, switch directions
+				System.out.println("Changing directions");
 				up = !up;
 			}
 		}		

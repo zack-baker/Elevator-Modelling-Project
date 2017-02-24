@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.nio.file.*;
+import java.io.*;
 public class Main{
 
 	public static int steps_up;
@@ -12,12 +14,22 @@ public class Main{
 		sim_name = c.get_simulation_name();
 		System.out.println(c);
 		Floors.init(c);
-		//loop through each timestep
+		
+		try
+		{
+			Files.write(Paths.get("logs\\"+Main.sim_name+".log"), "Timestep Created | Timestep Deleted | Total time | walking time | Spawned floor | destination floor\r\n".getBytes(), StandardOpenOption.APPEND);
+		}
+		catch(IOException e)
+		{
+			System.out.println("can't open the file");
+		}
 		Elevator[] elevators = new Elevator[c.get_number_of_elevators()];
+		//loop through each elevator to create it
 		for(int i=0;i<elevators.length;i++){
 			elevators[i] = new Elevator(c, Floors.floors[0]);
 		}
 		while(Timekeeper.get_timestep()<c.get_simulation_steps()){
+			System.out.println("Timestep: " + Timekeeper.get_timestep());
 			for(int i=0;i<Floors.floors.length;i++){
 				Floors.floors[i].spawn_person();
 			}

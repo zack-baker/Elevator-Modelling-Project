@@ -3,7 +3,8 @@ public class Floors{
 
 	public static void init(Config c){
 		for(int i=0;i<floors.length;i++){
-			floors[i] = new Floor(c, i);
+			System.out.println("Creating floor " + (i+1));
+			floors[i] = new Floor(c, (i+1));
 		}
 	}
 
