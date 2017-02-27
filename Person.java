@@ -19,9 +19,7 @@ public class Person
 		time_spawned = Timekeeper.get_timestep();
 		//create random floor destination for each person
 		Random r = new Random();
-		int floorNumber = r.nextInt(7)+1;
-		while(floorNumber==f.get_floor())
-			floorNumber = r.nextInt(7)+1;
+		int floorNumber = _get_destination_number(f.get_floor());
 		destination = Floors.floors[floorNumber-1];
 		if(f.get_floor()<destination.get_floor()){//if your destination is above you
 			steps_walking = Main.steps_up*(Math.abs(f.get_floor()-destination.get_floor()));
@@ -57,6 +55,34 @@ public class Person
 		}
 
 
+	}
+	private int _get_destination_number(int cur_floor){
+		Random r = new Random();
+		int check_val = r.nextInt(107);
+		int floor = cur_floor;
+		System.out.println("setting floor");
+		while(floor==cur_floor){
+			if(check_val<26){
+				floor = 1;
+			}else if(check_val<29){
+				floor = 2;
+			}else if(check_val<32){
+				floor = 3;
+			}else if(check_val<43){
+				floor = 4;
+			}else if(check_val<58){
+				floor = 5;
+			}else if(check_val<67){
+				floor = 6;
+			}else if(check_val<84){
+				floor = 7;
+			}else{
+				floor = 8;
+			}
+			check_val = r.nextInt(107);
+		}
+		System.out.println("Final checkval: " + check_val);
+		return floor;
 	}
 
 
