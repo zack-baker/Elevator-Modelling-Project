@@ -14,10 +14,12 @@ public class Main{
 		sim_name = c.get_simulation_name();
 		System.out.println(c);
 		Floors.init(c);
-		
+		File f = new File("logs/" + sim_name + ".log");
+		try{f.createNewFile();}catch(IOException e){e.printStackTrace();}
+		try{PrintWriter pw = new PrintWriter(f);pw.close();}catch(IOException e){}
 		try
 		{
-			Files.write(Paths.get("logs\\"+Main.sim_name+".log"), "Timestep Created | Timestep Deleted | Total time | walking time | Spawned floor | destination floor\r\n".getBytes(), StandardOpenOption.APPEND);
+			Files.write(Paths.get("logs/"+sim_name+".log"), "Timestep Created | Timestep Deleted | Total time | walking time | Spawned floor | destination floor\n".getBytes(), StandardOpenOption.APPEND);
 		}
 		catch(IOException e)
 		{
