@@ -45,11 +45,11 @@ public class Person
 
 		System.out.println("DELETING A PERSON: Total Time: " + (Timekeeper.get_timestep()-time_spawned));
 
-		String line = Integer.toString(time_spawned) + " " + Integer.toString(Timekeeper.get_timestep()) + " " + Integer.toString(Timekeeper.get_timestep()-time_spawned) + " " + Integer.toString(steps_walking) + " " + Integer.toString(spawned_floor.get_floor()) + " " + Integer.toString(destination.get_floor()) + "\r\n";
+		String line = Integer.toString(time_spawned) + " " + Integer.toString(Timekeeper.get_timestep()) + " " + Integer.toString(Timekeeper.get_timestep()-time_spawned) + " " + Integer.toString(steps_walking) + " " + Integer.toString(spawned_floor.get_floor()) + " " + Integer.toString(destination.get_floor()) + "\n";
 		
 		try
 		{
-			Files.write(Paths.get("logs\\"+Main.sim_name+".log"), line.getBytes(), StandardOpenOption.APPEND);
+			Files.write(Paths.get("logs/"+Main.sim_name+".log"), line.getBytes(), StandardOpenOption.APPEND);
 		}
 		catch(IOException e)
 		{
