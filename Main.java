@@ -8,28 +8,59 @@ public class Main{
 	public static String sim_name;
 
 	public static void main(String[] args){
+		if(args.length<1){
+			System.err.println("USAGE: Please provide a path to a valid config file (check the config/ folder)");
+			return;
+		}
 		Config c = new Config(args[0]);//the first command line argument is the path of the config file
 		steps_up = c.get_steps_per_floor_stairs_up();
 		steps_down = c.get_steps_per_floor_stairs_down();
 		sim_name = c.get_simulation_name();
 		System.out.println(c);
 		Floors.init(c);
-		File f = new File("logs/" + sim_name + ".log");
-		try{f.createNewFile();}catch(IOException e){e.printStackTrace();}
-		try{PrintWriter pw = new PrintWriter(f);pw.close();}catch(IOException e){}
+		System.out.println("Sim name is: " + sim_name);
+		String log_name = get_log_name(sim_name);
+		File f = new File("logs/" + log_name + ".log");
+		try{
+			f.createNewFile();
+		}
+		catch(IOException e){
+			System.err.println("FATAL: Error creating log file. Aborting.");
+			e.printStackTrace();
+			return;
+		}
+		/*What does this even do?*/
+		try{
+			PrintWriter pw = new PrintWriter(f);
+			pw.close();
+		}
+		catch(IOException e){
+			System.err.println("???: Error with PrintWriter");
+			return;
+		}
+
 		try
 		{
-			Files.write(Paths.get("logs/"+sim_name+".log"), "Timestep Created | Timestep Deleted | Total time | walking time | Spawned floor | destination floor\n".getBytes(), StandardOpenOption.APPEND);
+			Files.write(Paths.get("logs/"+log_name+".log"), "Timestep Created | Timestep Deleted | Total time | walking time | Spawned floor | destination floor\n".getBytes(), StandardOpenOption.APPEND);//Write the headers to the log file
 		}
 		catch(IOException e)
 		{
-			System.out.println("can't open the file");
+			System.err.println("FATAL: can't open the log file to write the headers. Aborting");
+			return;
 		}
 		Elevator[] elevators = new Elevator[c.get_number_of_elevators()];
 		//loop through each elevator to create it
 		for(int i=0;i<elevators.length;i++){
 			elevators[i] = new Elevator(c, Floors.floors[0]);
 		}
+		/*for each timestep:
+		each floor checks for new people
+		the elevator checks to see of it moves onto the next floor
+		if the elevator is at a floor, let off people at that floor and pick up waiting people.
+		print to a file, the person instance and the time step they got on the elevator, the floor they got on,
+		the floor they got off, (maybe the total floors they traveled?)
+		*/
+
 		while(Timekeeper.get_timestep()<c.get_simulation_steps()){
 			System.out.println("Timestep: " + Timekeeper.get_timestep());
 			for(int i=0;i<Floors.floors.length;i++){
@@ -59,15 +90,20 @@ public class Main{
 		}while(p>l);
 		return k-1;
 	}
+	/**
+	*	This method strips the path of the provided config file to just the local file name, to use for the log file name
+	*	@param pathname the path to the config file, provided by the user
+	*	@return the stripped filename
+	*/
+	public static String get_log_name(String pathname){
+		String[] parts = pathname.split("/");
+		String localfile = parts[parts.length-1];
+		System.out.println("Localfile is " + localfile);
+		String filename = localfile.split("\\.")[0];
 
-	/*for each timestep:
-		each floor checks for new people
-		the elevator checks to see of it moves onto the next floor
-		if the elevator is at a floor, let off people at that floor and pick up waiting people.
+		return filename;
+	}
 
-		print to a file, the person instance and the time step they got on the elevator, the floor they got on,
-		the floor they got off, (maybe the total floors they traveled?)
-		*/
 
 		
 
