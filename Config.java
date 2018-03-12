@@ -17,12 +17,13 @@ public class Config{
 	*/
 	public Config(String pathname){
 		sim_name = pathname;
-		pathname = "configs/" + pathname + ".conf";//get the config file specifically from the given path
+		//don't assume the pathname is in the configs folder.
+		//pathname = "configs/" + pathname + ".conf";//get the config file specifically from the given path
 		Scanner sc = null;//create the scanner object to read the config file
 		try{
 			sc = new Scanner(new File(pathname));
 		}catch(FileNotFoundException fnf){
-			System.out.println("File Not Found Exception in Config constructor");
+			System.err.println("ERROR: File " + sim_name + "not found. Exception in Config constructor");
 		}
 		while (sc.hasNextLine()) {//for each line
 			String line = sc.nextLine();	
@@ -101,14 +102,14 @@ public class Config{
 	*/
 	public String toString(){
 		String str = "--------------------------------------------\n";
-		str+= "|        Simulation name: " + sim_name + "       |\n";
-		str+= "|          Number of Elevators: " + number_of_elevators + "          |\n";
-		str+= "|             Lambda: " + lambda + "              |\n"; 
-		str+= "|      Steps per floor (elevator): " + steps_per_floor_elevator + "      |\n";
-		str+= "|     Steps per floor (stairs, up): " + steps_per_floor_stairs_up + "     |\n";
-		str+= "|    Steps per floor (stairs, down): " + steps_per_floor_stairs_down + "    |\n";
-		str+= "|    # of elevator stationary steps: " + stationary_steps + "    |\n" ;
-		str+= "|          Total timesteps: " + simulation_steps + "          |\n";
+		str+= "|        Simulation name: " + sim_name + "       \n";
+		str+= "|          Number of Elevators: " + number_of_elevators + "          \n";
+		str+= "|             Lambda: " + lambda + "              \n"; 
+		str+= "|      Steps per floor (elevator): " + steps_per_floor_elevator + "      \n";
+		str+= "|     Steps per floor (stairs, up): " + steps_per_floor_stairs_up + "     \n";
+		str+= "|    Steps per floor (stairs, down): " + steps_per_floor_stairs_down + "    \n";
+		str+= "|    # of elevator stationary steps: " + stationary_steps + "    \n" ;
+		str+= "|          Total timesteps: " + simulation_steps + "          \n";
 		str+= "--------------------------------------------\n";
 
 		return str;
